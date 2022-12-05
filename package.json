@@ -2,7 +2,7 @@
   "name": "demo1",
   "version": "8.1.5",
   "private": true,
-  "homepage": "http://Buvi12.github.io/orcl-application/",
+  "homepage": "http://Buvi14.github.io/orcl-application",
   "dependencies": {
     "@formatjs/intl-pluralrules": "4.3.3",
     "@formatjs/intl-relativetimeformat": "10.0.1",
@@ -36,6 +36,7 @@
     "react-table": "^7.7.0",
     "react-topbar-progress-indicator": "4.1.1",
     "sass": "1.50.1",
+    "serve": "^14.1.2",
     "sheetjs-style": "^0.15.8",
     "socicon": "3.0.5",
     "yup": "0.32.11"

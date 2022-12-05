@@ -3,7 +3,7 @@ import './Usercomponent.scss';
 
 
 
-const UserTable = ({ users,callUser}:any) => {
+const UserTable = ({ users,callUser,activeRow}:any) => {
 
     return (
         <>
@@ -15,8 +15,8 @@ const UserTable = ({ users,callUser}:any) => {
                         {/* begin::Table head */}
                         <thead>
                             <tr className='fw-bold text-muted'>
-                                <th className='min-w-150px'>Display Name</th>
-                                <th className='min-w-140px'>User</th>
+                                <th className='min-w-150px fs-18px'>Display Name</th>
+                                <th className='min-w-140px fs-18px'>User</th>
                             </tr>
                         </thead>
                         {/* end::Table head */}
@@ -25,7 +25,7 @@ const UserTable = ({ users,callUser}:any) => {
                             {
                                 users && users.map((user_data: any) => {
                                     return (
-                                        <tr key={user_data.id} onClick={() => { callUser(user_data.id) }}>
+                                        <tr className={activeRow === user_data.id ? 'bg-secondary' : 'bg-white'} key={user_data.id} onClick={() => { callUser(user_data.id) }}>
                                             <td>
                                                 <div className="d-flex align-items-center">
                                                     <div className="symbol symbol-50px me-5">
@@ -40,7 +40,7 @@ const UserTable = ({ users,callUser}:any) => {
                                                     User Name : <strong className="text-primary">{user_data.name.familyName}</strong>
                                                 </span>
                                                 <span className="text-muted fw-bold text-muted d-block fs-6">
-                                                    <span className="text-dark fw-bolder">Email: </span>
+                                                    <span className="text-dark fw-bolder">Email: <strong className="text-primary">{user_data.emails[0].value}</strong></span>
                                                 </span>
                                             </td>
                                         </tr>

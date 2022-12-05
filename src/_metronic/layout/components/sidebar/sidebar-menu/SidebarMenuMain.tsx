@@ -10,22 +10,32 @@ const SidebarMenuMain = () => {
 
   return (
     <>
-      <SidebarMenuItem
+      {/* <SidebarMenuItem
         to='/dashboard'
         icon='/media/icons/duotune/art/art002.svg'
-        title={intl.formatMessage({ id: 'MENU.DASHBOARD' })}
+        title='Users'
         fontIcon='bi-app-indicator'
-      />
+      /> */}
+      <SidebarMenuItemWithSub
+        to='/users'
+        icon='/media/icons/duotune/communication/com006.svg'
+        title='Users'
+        fontIcon='bi-person'
+      >
+        <SidebarMenuItem to='/dashboard' title='User Update' />
+      </SidebarMenuItemWithSub>
+      <SidebarMenuItemWithSub
+        to='/settings'
+        icon='/media/icons/duotune/communication/com006.svg'
+        title='Settings'
+        fontIcon='bi-person'
+      >
+        <SidebarMenuItem to='/config' title='Configuration' />
+      </SidebarMenuItemWithSub>
       <SidebarMenuItem
-        to='/roles'
+        to='/audit'
         icon='/media/icons/duotune/art/art002.svg'
-        title='Roles'
-        fontIcon='bi-app-indicator'
-      />
-      <SidebarMenuItem
-        to='/admin'
-        icon='/media/icons/duotune/art/art002.svg'
-        title='Administrations'
+        title='Audit Trial'
         fontIcon='bi-app-indicator'
       />
     </>

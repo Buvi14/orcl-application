@@ -7,6 +7,9 @@ import {MenuTestPage} from '../pages/MenuTestPage'
 import {getCSSVariableValue} from '../../_metronic/assets/ts/_utils'
 import {WithChildren} from '../../_metronic/helpers'
 import BuilderPageWrapper from '../pages/layout-builder/BuilderPageWrapper'
+import BulkUploadComponent from '../pages/dashboard/BulkUploadComponent'
+import ConfigComponent from '../pages/dashboard/ConfigComponent'
+import AuditTrial from '../pages/audittrial/AuditTrail'
 
 const PrivateRoutes = () => {
   const WizardsPage = lazy(() => import('../modules/wizards/WizardsPage'))
@@ -19,8 +22,11 @@ const PrivateRoutes = () => {
         <Route path='auth/*' element={<Navigate to='/dashboard' />} />
         {/* Pages */}
         <Route path='dashboard' element={<DashboardWrapper />} />
+        <Route path ='uploaduserfile' element={<BulkUploadComponent/>} />
         <Route path='builder' element={<BuilderPageWrapper />} />
+        <Route path='config' element={< ConfigComponent/>} />
         <Route path='menu-test' element={<MenuTestPage />} />
+        <Route path='audit' element={<AuditTrial />} />
         {/* Lazy Modules */}
         
         

@@ -2,12 +2,18 @@ import {useIntl} from 'react-intl'
 import {MenuItem} from './MenuItem'
 import {MenuInnerWithSub} from './MenuInnerWithSub'
 import {MegaMenu} from './MegaMenu'
+import { useContext } from 'react'
+import Connectionserver from '../../../../../app/Context'
 
-export function MenuInner() {
+export function MenuInner({connectionState}:any) {
+
+  // const {connectionState} = useContext(Connectionserver)as any;
   const intl = useIntl()
   return (
     <>
-      <MenuItem title={intl.formatMessage({id: 'MENU.DASHBOARD'})} to='/dashboard' />
+      <span title='connection strings'className='fw-800 fs-20px mt-9' ><strong>{connectionState}</strong></span>
+
+
       {/* <MenuItem title='Layout Builder' to='/builder' /> */}
       {/* <MenuInnerWithSub
         title='Crafted'

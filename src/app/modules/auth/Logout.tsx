@@ -1,5 +1,6 @@
 import {useEffect} from 'react'
-import {Navigate, Routes} from 'react-router-dom'
+import {Navigate, Routes, Route} from 'react-router-dom'
+import { Login } from './components/Login'
 import {useAuth} from './core/Auth'
 
 export function Logout() {
@@ -10,8 +11,10 @@ export function Logout() {
   }, [logout])
 
   return (
+    <>
     <Routes>
-      <Navigate to='/auth/login' />
+      <Route path='*' element={<Navigate to='/auth/login' />} />
     </Routes>
+    </>
   )
 }

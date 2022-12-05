@@ -1,4 +1,5 @@
 import clsx from 'clsx'
+import { Link } from 'react-router-dom'
 import {KTSVG, toAbsoluteUrl} from '../../../helpers'
 import {useLayout} from '../../core'
 
@@ -12,6 +13,9 @@ const Navbar = () => {
   const {config} = useLayout()
   return (
     <div className='app-navbar flex-shrink-0'>
+      <div className="mt-5 fw-bolder ">
+      <Link to='logout'><button className='btn btn-primary'>Logout</button></Link>
+      </div>
       {/* <div className={clsx('app-navbar-item align-items-stretch', itemClass)}>
         <Search />
       </div> */}

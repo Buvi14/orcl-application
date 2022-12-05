@@ -1,10 +1,11 @@
-import {useEffect} from 'react'
+import {useEffect,useContext} from 'react'
 import {Outlet, useLocation} from 'react-router-dom'
 import {HeaderWrapper} from './components/header'
 import {Content} from './components/content'
 import {Sidebar} from './components/sidebar'
 import {PageDataProvider} from './core'
 import {reInitMenu} from '../helpers'
+import Context from '../../app/Context'
 
 const MasterLayout = () => {
   const location = useLocation()
@@ -13,6 +14,7 @@ const MasterLayout = () => {
   }, [location.key])
 
   return (
+    <Context>
     <PageDataProvider>
       {/* <ThemeModeProvider> */}
         <div className='d-flex flex-column flex-root app-root' id='kt_app_root'>
@@ -32,6 +34,7 @@ const MasterLayout = () => {
         </div>
       {/* </ThemeModeProvider> */}
     </PageDataProvider>
+    </Context>
   )
 }
 

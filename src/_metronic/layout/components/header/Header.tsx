@@ -1,8 +1,12 @@
-import {FC, useEffect} from 'react'
+import {FC, useContext, useEffect} from 'react'
 import {ILayout, useLayout} from '../../core'
 import {MenuInner} from './header-menus'
+import { Connectionserver } from '../../../../app/Context'
 
 const Header: FC = () => {
+
+  const {connectionState} = useContext(Connectionserver);
+
   const {config} = useLayout()
   useEffect(() => {
     updateDOM(config)
@@ -24,7 +28,7 @@ const Header: FC = () => {
       id='kt_app_header_menu'
       data-kt-menu='true'
     >
-      <MenuInner />
+      <MenuInner connectionState={connectionState} />
     </div>
   )
 }

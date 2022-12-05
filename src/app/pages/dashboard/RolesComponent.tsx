@@ -1,7 +1,7 @@
 import React,{useState} from "react";
 import searchlogo from './images/gen021.svg'
 
-const RolesComponent = ({userData, roles}:any) =>{
+const RolesComponent = ({userData, roles,online}:any) =>{
     const[searchRole, setSearchRoles]=useState<any>('');
 
 
@@ -9,13 +9,14 @@ const RolesComponent = ({userData, roles}:any) =>{
         
         return data && data.filter((item:any) => item.displayName?.includes(searchRole));
     }
-
+    console.log(roles);
     return(
         <>
         {
                 userData &&
                 <div className={`card card-xl-stretch mb-xl-8`}>
-                    <div className='card-header border-0 pt-5 d-flex align-items-center justify-content-start'>
+                    <div className='card-header border-0 pt-5 d-flex align-items-center justify-content-between'>
+                    <div className="d-flex">
                     <h3 className='card-title align-items-start flex-column'>
                         <span className='card-label fw-bold fs-3 mb-1'>Roles</span>
                         <span className='text-muted mt-1 fw-semibold fs-7'></span>
@@ -31,6 +32,11 @@ const RolesComponent = ({userData, roles}:any) =>{
                             />
                         <img src={searchlogo} alt="search" className="svg-icon-1 position-relative" width="20px" style={{ right: '30px' }} />
                     </div>
+                    </div>
+                    {online &&<div className="d-flex  w-250px justify-content-between">
+                        <button className="btn btn-primary mr-4">Save</button>
+                        <button className="btn btn-secondary ml-2">Cancel</button>
+                    </div>}
 
                 </div>
                 <div className='table-wrapper-scroll-y my-custom-scrollbar card-body py-3'>
@@ -41,9 +47,9 @@ const RolesComponent = ({userData, roles}:any) =>{
                             {/* begin::Table head */}
                             <thead>
                                 <tr className='fw-bold text-muted'>
-                                    <th className='min-w-150px'>ROLE CODE</th>
-                                    <th className='min-w-140px'>ROLE NAME</th>
-                                    <th className='min-w-140px'>INHERITED BY ROLE NAME</th>
+                                    <th className='w-140px fs-3'>Role Name</th>
+                                    <th className='min-w-140px'></th>
+                                    <th className='min-w-350px'>Add / Remove Roles</th>
                                 </tr>
                             </thead>
                             {/* end::Table head */}
@@ -53,26 +59,24 @@ const RolesComponent = ({userData, roles}:any) =>{
                                     roles && search(roles).map((roles_data: any) => {
                                         return (
                                             <tr key={roles_data.id}>
-                                                <td>
+                                                {/* <td>
                                                     <div className="d-flex align-items-center">
                                                         <div className="symbol symbol-50px me-5">
                                                         </div>
                                                         <div className="d-flex justify-content-start flex-column">
-                                                            {roles_data.id}
+                                                            
                                                         </div>
                                                     </div>
-                                                </td>
+                                                </td> */}
                                                 <td>
                                                     <span className="text-dark fw-bolder d-block mb-1 fs-6">
                                                         {roles_data.displayName}
                                                     </span>
-                                                    <span className="text-muted fw-bold text-muted d-block fs-6">
-                                                        {roles_data.value}
-                                                    </span>
+                                                    
                                                 </td>
                                                 <td>
                                                     {roles_data.available ?
-                                                    <input type="checkbox" className="form-check-input" defaultChecked={roles_data.available }/> : <input className="form-check-input"  type="checkbox" /> }
+                                                    <input type="checkbox" className="form-check-input fw-bolder" defaultChecked={roles_data.available && roles_data.available}/> : <input className="form-check-input"  type="checkbox" /> }
                                                 </td>
                                             </tr>
                                         )
