@@ -2,6 +2,7 @@
   "name": "demo1",
   "version": "8.1.5",
   "private": true,
+  "proxy":"http://ec2-13-127-187-69.ap-south-1.compute.amazonaws.com/api/",
   "homepage": "http://Buvi14.github.io/orcl-application",
   "dependencies": {
     "@formatjs/intl-pluralrules": "4.3.3",
@@ -30,6 +31,7 @@
     "react-dom": "18.0.0",
     "react-inlinesvg": "3.0.0",
     "react-intl": "5.25.0",
+    "react-paginate": "^8.1.4",
     "react-query": "3.38.0",
     "react-router-dom": "6.3.0",
     "react-scripts": "5.0.1",
@@ -75,6 +77,7 @@
     "eject": "react-scripts eject",
     "lint": "prettier --check .",
     "format": "prettier --write .",
+    "proxy": "lcp --proxyUrl http://ec2-13-127-187-69.ap-south-1.compute.amazonaws.com/api",
     "rtl": "webpack --config=rtl.config.js",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"

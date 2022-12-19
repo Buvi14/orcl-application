@@ -9,7 +9,7 @@ const RolesComponent = ({ userData, roles, online }: any) => {
 
         return data && data.filter((item: any) => item.displayName?.includes(searchRole));
     }
-    console.log(roles);
+
     return (
         <>
             {
@@ -47,36 +47,33 @@ const RolesComponent = ({ userData, roles, online }: any) => {
                                 {/* begin::Table head */}
                                 <thead>
                                     <tr className='fw-bold text-muted'>
-                                        <th className='w-140px fs-4'>Role Name</th>
-                                        {/* <th className='min-w-140px'></th> */}
-                                        <th className='min-w-350px fs-4'>Add / Remove Roles</th>
+                                        <th className='w-140px fs-4'>Role Code</th>
+                                        <th className='min-w-140px'>Role Name</th>
+                                        {/* <th className='min-w-350px fs-4'>Add / Remove Roles</th> */}
                                     </tr>
                                 </thead>
                                 {/* end::Table head */}
                                 {/* begin::Table body */}
                                 <tbody>
                                     {
-                                        roles && search(roles).map((roles_data: any) => {
+                                        roles && roles.map((roles_data: any) => {
                                             return (
-                                                <tr key={roles_data.id}>
-                                                    {/* <td>
-                                                    <div className="d-flex align-items-center">
-                                                        <div className="symbol symbol-50px me-5">
-                                                        </div>
-                                                        <div className="d-flex justify-content-start flex-column">
-                                                            
-                                                        </div>
-                                                    </div>
-                                                </td> */}
+                                                <tr key={roles_data.RoleId}>
                                                     <td>
                                                         <span className="text-dark fw-bolder d-block mb-1 fs-6">
-                                                            {roles_data.displayName}
+                                                            {roles_data.RoleCode}
                                                         </span>
 
                                                     </td>
                                                     <td>
-                                                        {roles_data.available ?
-                                                            <input type="checkbox" className="form-check-input fw-bolder" defaultChecked={roles_data.available && roles_data.available} /> : <input className="form-check-input" type="checkbox" />}
+                                                        <span className="text-dark fw-bolder d-block mb-1 fs-6">
+                                                            {roles_data.RoleName}
+                                                        </span>
+
+                                                    </td>
+                                                    <td>
+                                                        {/* {roles_data.available ?
+                                                            <input type="checkbox" className="form-check-input fw-bolder" defaultChecked={roles_data.available && roles_data.available} /> : <input className="form-check-input" type="checkbox" />} */}
                                                     </td>
                                                 </tr>
                                             )

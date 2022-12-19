@@ -18,26 +18,51 @@ import { Connectionserver } from "../../Context";
 const UserComponent = () => {
 
     const { connectionState } = useContext(Connectionserver);
-    console.log(connectionState);
     const [usersall, setUserAll] = useState<any>();
     const [users, setUser] = useState<any>();
     const [roles, setRoles] = useState<any>();
     const [searchUser, setSearchUser] = useState<string>('');
     const [userData, setUserData] = useState<any>();
     const [rolesfound, setRolesFound] = useState<any>();
-    const [rolesJson, setRolesJson] = useState<any>();
+    const [load, setLoad] = useState<any>(false);
     const [showModal, setShowModal] = useState<any>(false);
     const [fileName, setFileName] = useState<any>('');
     const [activeRow, setActiveRow] = useState<any>();
 
-
-
     useEffect(() => {
-        // axios.get('./data/userResponse.json').then((data)=>{
-        setUserAll(users1.Resources);
-        setRoles(roles1.Resources);
-        setUser(users1.Resources);
-    })
+        // fetch('http://ec2-13-127-187-69.ap-south-1.compute.amazonaws.com/api/getOrclUserRoles', {
+        //     mode: 'no-cors'
+        // }).then((res) => res.json()).then(data => {
+        //     console.log(data);
+        // })
+        getUserRoles();
+        getAllUsers();
+        // setUserAll(users1.Resources);
+        // setRoles(roles1.Resources);
+        // setUser(users1.Resources);
+    }, [connectionState])
+
+    const getUserRoles = async () => {
+        console.log("user api=--==")
+        axios.get(`http://localhost:3000/getuserroles`, {
+        }).then((res) => {
+            console.log(res.data.items);
+            setRoles(res.data.items)
+        })
+
+
+        // let da = await axios.get("http://ec2-13-127-187-69.ap-south-1.compute.amazonaws.com/api/getOrclUserRoles",
+        //     { headers: { crossDomain: true, 'Access-control-allow-origin': '*' } })
+
+    }
+    const getAllUsers = async () => {
+        console.log("---------------------su")
+        let da: any = await axios.get(`http://localhost:3000/getusers`)
+        await setUser(da.data.items)
+        await setUserAll(da.data.items)
+        console.log(users)
+        console.log(usersall)
+    }
 
 
     const chooseFileName = (e: any) => {
@@ -83,6 +108,7 @@ const UserComponent = () => {
 
 
     const callUser = async (data: any) => {
+        console.log(data);
         var roles_found: any;
         roles_found = roles;
         setActiveRow(data);
@@ -106,7 +132,6 @@ const UserComponent = () => {
             setUserData(find_user);
             setRolesFound(roles_found);
         }
-
     }
     const showUser = () => {
         for (let i = 0; i < users.length; i++) {
@@ -121,7 +146,7 @@ const UserComponent = () => {
     }
 
     const search = (data: any) => {
-
+        console.log(usersall)
         return data && data.filter((item: any) => item.displayName?.includes(searchUser));
     }
 
@@ -161,7 +186,7 @@ const UserComponent = () => {
                         </div>
                         {/* end::Header */}
 
-                        <UserTable users={search(usersall)} callUser={callUser} activeRow={activeRow} />
+                        {usersall && <UserTable users={usersall} callUser={callUser} activeRow={activeRow} />}
                     </div>
 
             }
