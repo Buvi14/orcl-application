@@ -1,17 +1,17 @@
-import {useIntl} from 'react-intl'
-import {MenuItem} from './MenuItem'
-import {MenuInnerWithSub} from './MenuInnerWithSub'
-import {MegaMenu} from './MegaMenu'
+import { useIntl } from 'react-intl'
+import { MenuItem } from './MenuItem'
+import { MenuInnerWithSub } from './MenuInnerWithSub'
+import { MegaMenu } from './MegaMenu'
 import { useContext } from 'react'
 import Connectionserver from '../../../../../app/Context'
 
-export function MenuInner({connectionState}:any) {
+export function MenuInner({ connectionState }: any) {
 
   // const {connectionState} = useContext(Connectionserver)as any;
   const intl = useIntl()
   return (
     <>
-      <span title='connection strings'className='fw-800 fs-20px mt-9' ><strong>{connectionState}</strong></span>
+      <span title='connection strings' className='fw-800 fs-20px mt-9' style={{ fontSize: '18px' }}><strong>{connectionState}</strong></span>
 
 
       {/* <MenuItem title='Layout Builder' to='/builder' /> */}
@@ -21,8 +21,8 @@ export function MenuInner({connectionState}:any) {
         menuPlacement='bottom-start'
         menuTrigger='click'
       > */}
-        {/* PAGES */}
-        {/* <MenuInnerWithSub
+      {/* PAGES */}
+      {/* <MenuInnerWithSub
           title='Pages'
           to='/crafted/pages'
           fontIcon='bi-archive'
@@ -47,7 +47,7 @@ export function MenuInner({connectionState}:any) {
               title='Connections'
               hasBullet={true}
             /> */}
-          {/* </MenuInnerWithSub>
+      {/* </MenuInnerWithSub>
           <MenuInnerWithSub
             title='Wizards'
             to='/crafted/pages/wizards'
@@ -61,8 +61,8 @@ export function MenuInner({connectionState}:any) {
           </MenuInnerWithSub>
         </MenuInnerWithSub> */}
 
-        {/* ACCOUNT */}
-        {/* <MenuInnerWithSub
+      {/* ACCOUNT */}
+      {/* <MenuInnerWithSub
           title='Accounts'
           to='/crafted/accounts'
           fontIcon='bi-person'
@@ -74,8 +74,8 @@ export function MenuInner({connectionState}:any) {
           <MenuItem to='/crafted/account/settings' title='Settings' hasBullet={true} />
         </MenuInnerWithSub> */}
 
-        {/* ERRORS */}
-        {/* <MenuInnerWithSub
+      {/* ERRORS */}
+      {/* <MenuInnerWithSub
           title='Errors'
           to='/error'
           fontIcon='bi-sticky'
@@ -87,8 +87,8 @@ export function MenuInner({connectionState}:any) {
           <MenuItem to='/error/500' title='Error 500' hasBullet={true} />
         </MenuInnerWithSub> */}
 
-        {/* Widgets */}
-        {/* <MenuInnerWithSub
+      {/* Widgets */}
+      {/* <MenuInnerWithSub
           title='Widgets'
           to='/crafted/widgets'
           fontIcon='bi-layers'
@@ -133,7 +133,7 @@ export function MenuInner({connectionState}:any) {
         menuPlacement='bottom-start'
         menuTrigger='click'
       > */}
-        {/* <MegaMenu /> */}
+      {/* <MegaMenu /> */}
       {/* </MenuInnerWithSub> */}
     </>
   )
