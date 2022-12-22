@@ -46,7 +46,7 @@ const UserComponent = () => {
         console.log("user api=--==")
         axios.get(`http://localhost:3000/getuserroles`, {
         }).then((res) => {
-            console.log(res.data.items);
+            // console.log(res.data.items);
             setRoles(res.data.items)
         })
 
@@ -56,12 +56,12 @@ const UserComponent = () => {
 
     }
     const getAllUsers = async () => {
-        console.log("---------------------su")
-        let da: any = await axios.get(`http://localhost:3000/getusers`)
+        // console.log("---------------------su")
+        let da: any = await axios.get(`http://ec2-13-127-187-69.ap-south-1.compute.amazonaws.com/api/getOrclUserAccounts`)
         await setUser(da.data.items)
         await setUserAll(da.data.items)
-        console.log(users)
-        console.log(usersall)
+        // console.log(users)
+        // console.log(usersall)
     }
 
 
@@ -107,31 +107,14 @@ const UserComponent = () => {
     }
 
 
-    const callUser = async (data: any) => {
-        console.log(data);
-        var roles_found: any;
-        roles_found = roles;
-        setActiveRow(data);
-        let find_user: any;
-        console.log(roles_found);
-        for (let i = 0; i < users.length; i++) {
-            if (data === users[i].id) {
-                find_user = users[i];
-            }
-        }
-        if (find_user) {
-            for (let j = 0; j < roles_found.length; j++) {
-                for (let i = 0; i < find_user.roles.length; i++) {
-
-                    if (roles_found[j].id == find_user.roles[i].id) {
-                        roles_found[j].available = true;
-                    }
-
-                }
-            }
-            setUserData(find_user);
-            setRolesFound(roles_found);
-        }
+    const callUser = async (GUID: any) => {
+        console.log(GUID);
+        setRolesFound('');
+        setUserData('');
+        let rolesAssigned: any = await axios.get(`http://ec2-13-127-187-69.ap-south-1.compute.amazonaws.com/api/getOrclUserRolesGuid/${GUID}`)
+        console.log(rolesAssigned);
+        setUserData(GUID);
+        setRolesFound(rolesAssigned.data);
     }
     const showUser = () => {
         for (let i = 0; i < users.length; i++) {

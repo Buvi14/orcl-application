@@ -34,7 +34,8 @@ const UserTable = ({ users, callUser, activeRow }: any) => {
                         <thead>
                             <tr className='fw-bold text-muted '>
                                 <th className='min-w-150px fs-4'>Display Name</th>
-                                <th className='min-w-140px fs-4'>User</th>
+                                <th className='min-w-140px fs-4'>Person Id</th>
+                                <th className='min-w-140px fs-4'>Person Number</th>
                             </tr>
                         </thead>
                         {/* end::Table head */}
@@ -43,7 +44,7 @@ const UserTable = ({ users, callUser, activeRow }: any) => {
                             {
                                 items && items.map((user_data: any) => {
                                     return (
-                                        <tr className={activeRow === user_data.UserId ? 'bg-secondary' : 'bg-white'} key={user_data.UserId} onClick={() => { callUser(user_data.UserId) }}>
+                                        <tr className={activeRow === user_data.UserId ? 'bg-secondary' : 'bg-white'} key={user_data.UserId} onClick={() => { callUser(user_data.GUID) }}>
                                             <td>
                                                 <div className="d-flex align-items-center">
                                                     <div className="symbol symbol-50px me-5">
@@ -55,10 +56,13 @@ const UserTable = ({ users, callUser, activeRow }: any) => {
                                             </td>
                                             <td>
                                                 <span className="text-dark fw-bolder d-block mb-1 fs-6">
-                                                    User Name : <strong className="text-primary">{user_data.PersonNumber}</strong>
+                                                    <strong className="text-primary">{user_data.PersonNumber}</strong>
                                                 </span>
+
+                                            </td>
+                                            <td>
                                                 <span className="text-muted fw-bold text-muted d-block fs-6">
-                                                    <span className="text-dark fw-bolder">Email: <strong className="text-primary">{user_data.PersonId}</strong></span>
+                                                    <span className="text-dark fw-bolder"><strong className="text-primary">{user_data.PersonId}</strong></span>
                                                 </span>
                                             </td>
                                         </tr>

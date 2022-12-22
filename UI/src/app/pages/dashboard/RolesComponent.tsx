@@ -3,6 +3,7 @@ import searchlogo from './images/gen021.svg'
 
 const RolesComponent = ({ userData, roles, online }: any) => {
     const [searchRole, setSearchRoles] = useState<any>('');
+    console.log(roles);
 
 
     const search = (data: any) => {
@@ -47,33 +48,40 @@ const RolesComponent = ({ userData, roles, online }: any) => {
                                 {/* begin::Table head */}
                                 <thead>
                                     <tr className='fw-bold text-muted'>
-                                        <th className='w-140px fs-4'>Role Code</th>
-                                        <th className='min-w-140px'>Role Name</th>
-                                        {/* <th className='min-w-350px fs-4'>Add / Remove Roles</th> */}
+                                        <th className='w-140px fs-4'>Role Id</th>
+                                        {/* <th className='w-140px fs-4'>Role Code</th> */}
+                                        <th className='w-140px fs-4'>Role Name</th>
+                                        <th className='w-140px fs-4'>Add / Remove Roles</th>
                                     </tr>
                                 </thead>
                                 {/* end::Table head */}
                                 {/* begin::Table body */}
                                 <tbody>
                                     {
-                                        roles && roles.map((roles_data: any) => {
+                                        roles && roles.items.map((roles_data: any) => {
                                             return (
                                                 <tr key={roles_data.RoleId}>
-                                                    <td>
-                                                        <span className="text-dark fw-bolder d-block mb-1 fs-6">
-                                                            {roles_data.RoleCode}
+                                                    <td style={{ width: '120px' }}>
+                                                        <span className="text-dark fw-bolder fs-6">
+                                                            {roles_data.RoleId}
                                                         </span>
 
                                                     </td>
-                                                    <td>
-                                                        <span className="text-dark fw-bolder d-block mb-1 fs-6">
+                                                    {/* <td style={{ width: '180px' }}>
+                                                        <span className="text-dark fw-bolder fs-6">
+                                                            {roles_data.RoleCode}
+                                                        </span>
+
+                                                    </td> */}
+                                                    <td style={{ width: '200px' }}>
+                                                        <span className="text-dark fw-bolder fs-6">
                                                             {roles_data.RoleName}
                                                         </span>
 
                                                     </td>
                                                     <td>
-                                                        {/* {roles_data.available ?
-                                                            <input type="checkbox" className="form-check-input fw-bolder" defaultChecked={roles_data.available && roles_data.available} /> : <input className="form-check-input" type="checkbox" />} */}
+                                                        {roles_data.Assigned === 1 ?
+                                                            <input type="checkbox" className="form-check-input fw-bolder" defaultChecked={true} /> : <input className="form-check-input" type="checkbox" />}
                                                     </td>
                                                 </tr>
                                             )
