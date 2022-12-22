@@ -24,6 +24,7 @@ const PrivateRoutes = () => {
         <Route path='dashboard' element={<DashboardWrapper />} />
         <Route path ='uploaduserfile' element={<BulkUploadComponent/>} />
         <Route path='builder' element={<BuilderPageWrapper />} />
+        <Route path='dashboard/config' element={<Navigate to='/config' />} />
         <Route path='config' element={< ConfigComponent/>} />
         <Route path='menu-test' element={<MenuTestPage />} />
         <Route path='audit' element={<AuditTrial />} />

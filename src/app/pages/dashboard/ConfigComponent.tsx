@@ -8,19 +8,35 @@ import { Connectionserver } from '../../Context';
 
 
 export default function ConfigComponent() {
-    const {setConnection} = useContext(Connectionserver);
+    const { setConnection } = useContext(Connectionserver);
     const [showModal, setShowModal] = useState<any>(false);
     const [serverName, setServerName] = useState<any>('');
     const [userId, setUserId] = useState<any>('');
     const [password, setPassword] = useState<any>('');
     const [enable, setEnable] = useState<any>(true);
     const [jsondata, setJsonData] = useState<any>([]);
-    const [serverURl, setServerURL] = useState<any>('');
-    const [connection, setConnect] = useState<any>('Connect');
+    const [serverURL, setServerURL] = useState<any>('');
+    const [connection, setConnect] = useState<any>(false);
 
     const showmodal = () => {
         setShowModal(!showModal);
     }
+
+    const json_data = [{
+        'serverName': 'server1',
+        'serverURL': 'http://server1.connect.xyz/',
+        'userId': 'User12',
+        'password': 'abc@123',
+        'connection': false
+    },
+    {
+        'serverName': 'server2',
+        'serverURL': 'http://server2.connect.xyz/',
+        'userId': 'User13',
+        'password': 'abc@123',
+        'connection': false
+    }
+    ]
 
 
     // const setData = (e: any, name: any) => {
@@ -46,30 +62,36 @@ export default function ConfigComponent() {
     //     }
     // }
     useEffect(() => {
-        if (serverName && userId && password) {
+        setJsonData(json_data);
+        if (serverName && serverURL && userId && password) {
             setEnable(false);
         }
+        else {
+            setEnable(true);
+        }
 
-    }, [serverName, serverURl, userId, password])
+    }, [serverName, serverURL, userId, password])
 
     function saveData() {
         let data_json: any = {};
         data_json.serverName = serverName;
         data_json.userId = userId;
         data_json.password = password;
-        data_json.serverURL = serverURl;
-        let data1: any = [];
-        // data1.push(data_json);
-        setJsonData([...jsondata,data_json]);
+        data_json.serverURL = serverURL;
+        let data1: any = jsondata;
+        data1.push(data_json);
+        setJsonData(data1);
+        console.log(jsondata);
         setServerName('');
         setServerURL('');
         setUserId('');
         setPassword('');
         setEnable(true);
-        console.log(jsondata);
+        setShowModal(!showModal);
+
     }
 
-    const openModal = (data:any) =>{
+    const openModal = (data: any) => {
         console.log(data);
         setServerName(data.serverName);
         setServerURL(data.ServerURL);
@@ -78,14 +100,28 @@ export default function ConfigComponent() {
         setShowModal(!showModal);
     }
 
-    const selectConnect = (servername:any) =>{
-        if(connection === 'Connect'){
-            setConnection(`Server is Connected to ${servername}`)
-            setConnect('Disconnect');
-        }
-        else{
-            setConnect('Connect');
-        }
+    const selectConnect = (servername: any) => {
+        console.log(servername);
+        const updated_list = jsondata.map((data: any) => {
+            if (data.serverName === servername) {
+                setConnection('')
+                if (data.connection) {
+                    setConnection('No Server Connected');
+                    setConnect(false);
+                }
+                else {
+                    setConnection(`Server Connected to ${data.serverName}`);
+                    setConnect(true);
+                }
+                return { ...data, connection: !data.connection }
+            }
+            else if (data.connection) {
+                return { ...data, connection: !data.connection }
+            }
+            return data;
+        })
+        console.log(updated_list);
+        setJsonData(updated_list);
     }
 
 
@@ -111,18 +147,18 @@ export default function ConfigComponent() {
                                 {/* begin::Table head */}
                                 <thead>
                                     <tr className='fw-bold text-muted'>
-                                        <th className='w-140px'>Server Name</th>
-                                        <th className='min-w-140px'>Value</th>
-                                        <th className='w-100px'></th>
-                                        <th className='w-100px'></th>
+                                        <th className='w-140px fs-4'>Server Name</th>
+                                        <th className='min-w-140px fs-4'>Value</th>
+                                        <th className='w-100px fs-4'> Edit</th>
+                                        <th className='w-100px fs-4'>Connection</th>
                                     </tr>
                                 </thead>
                                 {/* end::Table head */}
-                                
+
                                 {/* begin::Table body */}
                                 <tbody>
-                                {jsondata && jsondata.map((data: any) => {
-                                       return (<tr key={data.userId}>
+                                    {jsondata && jsondata.map((data: any) => {
+                                        return (<tr key={data.userId}>
                                             <td>
                                                 <div className="d-flex align-items-center">
                                                     {data.serverName}
@@ -134,12 +170,15 @@ export default function ConfigComponent() {
                                                 </span>
                                             </td>
                                             <td>
-                                                <button className='btn' onClick={()=>{openModal(data)}}>
+                                                <button className='btn' onClick={() => { openModal(data) }}>
                                                     <img src={edit} className="svg-icon svg-icon-primary" alt="" />
                                                 </button>
                                             </td>
                                             <td>
-                                                <button className='btn btn-primary' onClick={()=>{selectConnect(data.serverName)}}>{connection}</button>
+                                                {data.connection ?
+                                                    <button className='btn btn-success' onClick={() => { selectConnect(data.serverName) }}>Disconnect</button> :
+                                                    <button className='btn btn-primary' onClick={() => { selectConnect(data.serverName) }}>Connect</button>}
+
                                             </td>
                                         </tr>)
                                     })}
@@ -166,7 +205,7 @@ export default function ConfigComponent() {
                             </div>
                             <div className="form-group h-80px">
                                 <label className='h-28px text-dark fs-26px fw-bold'>Server URL </label>
-                                <input type="text" required className="form-control" value={serverURl} onChange={e => { setServerURL(e.target.value) }} placeholder="Server Url..." />
+                                <input type="text" required className="form-control" value={serverURL} onChange={e => { setServerURL(e.target.value) }} placeholder="Server Url..." />
                             </div>
                             <div className="form-group h-80px">
                                 <label className='h-28px text-dark fs-26px fw-bold'>Enter UserId</label>
